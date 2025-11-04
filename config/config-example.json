@@ -1,0 +1,23 @@
+{
+  "db": {
+    "host": "localhost",
+    "port": 3306,
+    "username": "dbuser",
+    "password": "password",
+    "database": "ngc_omeka"
+  },
+  "apache_user": "www-data",
+  "admin": {
+    "name": "ngcadmin",
+    "email": "ngcadmin@example.com",
+    "password": "password"
+  },
+  "title": "My Omeka S Site",
+  "timezone": "UTC",
+  "site": {
+    "title": "My Omeka S Site",
+    "slug": "my-omeka-s-site",
+    "summary": "A brief summary of my Omeka S site.",
+    "theme": "default"
+  }
+}
