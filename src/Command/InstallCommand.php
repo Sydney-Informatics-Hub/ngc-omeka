@@ -262,11 +262,11 @@ INI;
         foreach ($dirs as $dir) {
             if (is_dir($dir)) {
                 $output->writeln("Setting permissions for directory: {$dir}...");
-                exec("chmod -R 775 " . escapeshellarg($dir), $output, $resultCode);
+                exec("chmod -R 775 " . escapeshellarg($dir), $cmdOutput, $resultCode);
                 if ($resultCode !== 0) {
                     $output->writeln("<comment>Failed to set permissions. Please set it manually.</comment>");
                 }
-                exec("chown -R {$apacheUser} " . escapeshellarg($dir), $output, $resultCode);
+                exec("sudo chown -R {$apacheUser} " . escapeshellarg($dir), $cmdOutput, $resultCode);
                 if ($resultCode !== 0) {
                     $output->writeln("<comment>Failed to change owner to {$apacheUser}. Please set it manually.</comment>");
                 }
