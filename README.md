@@ -63,8 +63,121 @@ To install the NGC Omeka S distribution, run the `install` command from the proj
 php console install
 ```
 
+You can pass the `-y` option to skip the confirmation prompt:
+
+```bash
+php console install -y
+```
+
 This will create the `public` directory under the project root. Set your web server's document root to the `public` 
 directory or configure a virtual host accordingly.
 
 Once it's done, you can access the Omeka S site by navigating to your server's URL or the configured host name 
 in a web browser.
+
+## Updating the Distribution
+
+To update the NGC Omeka S distribution, pull the latest changes from the repository and update the Composer 
+dependencies:
+
+```bash
+git pull
+composer update
+```
+
+Once it's done, run the update commands to update the installed Omeka S instance.
+
+> [!NOTE]
+> The update commands only update the core, modules, and themes of the installed instance based on the changes in
+> `distribution.json`. Changes to contents such as vocabularies, taxonomies and resource templates will not be applied
+> to prevent data loss and inconsistencies. You may choose to update those contents manually via the Omeka S admin
+> interface if needed.
+
+### Updating the instance code
+
+To update the instance code, run the following command:
+
+```bash
+php console update:code
+```
+
+You can pass the `-y` option to skip the confirmation prompt:
+
+```bash
+php console update:code -y
+```
+
+This command will check for newer versions of the Omeka S core, modules, and themes based on the 
+`distribution.json` file and update the files accordingly.
+
+### Updating the instance database
+
+After updating the instance code, you will need to update the instance database to apply any pending database
+migrations. Run the following command:
+
+```bash
+php console update:db
+```
+
+You can pass the `-y` option to skip the confirmation prompt:
+
+```bash
+php console update:db -y
+```
+
+Once it's done, log in to the Omeka S admin interface to verify that everything is working correctly.
+
+## Contributing
+
+### Distribution manifest
+
+The `distribution.json` file defines the Omeka S core, modules, themes and contents to be included in the 
+distribution. The following are the available properties in the manifest:
+
+- `core`: The Omeka S core version to be installed.
+  - `url`: The URL to download the Omeka S core package.
+  - `version`: The version of the Omeka S core.
+- `modules`: The list of modules to be installed.
+  - `name`: The name of the module. Note that this is the module ID (normally the same as the module folder name 
+    without any spaces) instead of the human-readable name.
+  - `url`: The URL to download the module package.
+  - `version`: The version of the module.
+- `themes`: The list of themes to be installed.
+  - `name`: The name of the theme. Note that this is the theme ID (normally the same as the theme folder name 
+    without any spaces) instead of the human-readable name.
+  - `url`: The URL to download the theme package.
+  - `version`: The version of the theme.
+- `vocabularies`: The list of vocabularies to be imported.
+  - `label`: The label of the vocabulary.
+  - `comment`: The comment/description of the vocabulary.
+  - `namespace_uri`: The LOV namespace URI of the vocabulary.
+  - `prefix`: The LOV prefix of the vocabulary.
+  - `file`: The path to the vocabulary file relative to the `vocabularies` directory.
+  - `format`: The format of the vocabulary file (e.g., `rdfxml`, `turtle`, `ntriples`, `jsonld`).
+- `taxonomies`: The list of taxonomies (custom vocabs) to be imported.
+  - `label`: The label of the vocabulary.
+  - `file`: The path to the taxonomy file relative to the `taxonomies` directory.
+- `resource_templates`: The list of resource templates to be imported.
+  - `label`: The label of the resource template.
+  - `file`: The path to the resource template file relative to the `resource-templates` directory.
+
+### Vocabularies
+
+All vocabularies included in the distribution should be placed in the `vocabularies` directory. The supported file
+formats are `rdfxml`, `turtle`, `ntriples`, and `jsonld`.
+
+After adding a new vocabulary definition file, update the `distribution.json` file to include the new vocabulary.
+
+### Taxonomies
+
+All taxonomies (custom vocabs) included in the distribution should be placed in the `taxonomies` directory. The files
+are in the same format as exported from 
+[Custom Vocab](https://omeka.org/s/docs/user-manual/modules/customvocab/#manage-custom-vocabs) module.
+
+### Resource Templates
+
+All resource templates included in the distribution should be placed in the `resource-templates` directory. The files
+are in the same format as exported from the built-in 
+[Resource Templates](https://omeka.org/s/docs/user-manual/content/resource-template/#export-a-resource-template) 
+feature in Omeka S. Note that the supported modules should be included in the distribution as well if custom
+value types are used in the resource templates.

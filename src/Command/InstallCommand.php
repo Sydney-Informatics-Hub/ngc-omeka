@@ -6,9 +6,12 @@ use App\Omeka;
 use GuzzleHttp\Client;
 use Omeka\Mvc\Controller\Plugin\Api;
 use Symfony\Component\Console\Command\Command;
+use Symfony\Component\Console\Helper\QuestionHelper;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Laminas\ServiceManager\ServiceManager;
+use Symfony\Component\Console\Question\ConfirmationQuestion;
 
 class InstallCommand extends Command
 {
@@ -17,10 +20,12 @@ class InstallCommand extends Command
     {
         $this->setName('install');
         $this->setDescription('Installs NGC Omeka S distribution.');
+        $this->addOption('yes', 'y', InputOption::VALUE_NONE, 'Automatic yes to prompts; assume "yes" as answer to all prompts and run non-interactively.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
+        $autoConfirm = $input->getOption('yes');
         $rootDir = dirname(__DIR__, 2);
         $distFile = $rootDir . '/distribution.json';
         $configPath = $rootDir . '/config/config.json';
@@ -42,6 +47,17 @@ class InstallCommand extends Command
 
         // Remove existing public directory
         if (is_dir($publicDir)) {
+            $output->writeln('<error>CAUTION: A directory named "public" already exists. Continuing with the installation will completely overwrite it.</error>');
+
+            if (!$autoConfirm) {
+                $qHelper = new QuestionHelper();
+                $question = new ConfirmationQuestion('Would you like to continue? (y|n)', false);
+
+                if (!$qHelper->ask($input, $output, $question)) {
+                    return Command::SUCCESS;
+                }
+            }
+
             $output->writeln('Removing existing public directory...');
             Helper::rrmdir($publicDir);
         }
@@ -69,7 +85,7 @@ class InstallCommand extends Command
         }
 
         // Reload Omeka application to recognize newly installed modules.
-        Omeka::reloadApp();
+        @Omeka::reloadApp();
         Omeka::authenticate();
 
         // Create site
