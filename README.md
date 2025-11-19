@@ -75,6 +75,19 @@ directory or configure a virtual host accordingly.
 Once it's done, you can access the Omeka S site by navigating to your server's URL or the configured host name 
 in a web browser.
 
+### Code-only Installation
+
+If you want to manually install and set up the Omeka S instance, you can pass the `--code-only` or `-c` option to the 
+install command:
+
+```bash
+php console install --code-only
+```
+
+This will only set up the Omeka S core, modules, and themes based on the `distribution.json` file without performing
+any database setup or content import. You will need to manually finish the installation via the Omeka S admin 
+interface.
+
 ## Updating the Distribution
 
 To update the NGC Omeka S distribution, pull the latest changes from the repository and update the Composer 

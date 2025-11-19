@@ -21,11 +21,13 @@ class InstallCommand extends Command
         $this->setName('install');
         $this->setDescription('Installs NGC Omeka S distribution.');
         $this->addOption('yes', 'y', InputOption::VALUE_NONE, 'Automatic yes to prompts; assume "yes" as answer to all prompts and run non-interactively.');
+        $this->addOption('code-only', 'c', InputOption::VALUE_NONE, 'Only download the Omeka S core code, modules and themes, skipping database installation and data import.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $autoConfirm = $input->getOption('yes');
+        $codeOnly = $input->getOption('code-only');
         $rootDir = dirname(__DIR__, 2);
         $distFile = $rootDir . '/distribution.json';
         $configPath = $rootDir . '/config/config.json';
@@ -70,6 +72,12 @@ class InstallCommand extends Command
         // Pre Omeka S installation steps
         if (!$this->preOmekaInstall($output, $config, $rootDir)) {
             return Command::FAILURE;
+        }
+
+        // If code-only installation, finish here.
+        if ($codeOnly) {
+            $output->writeln('<info>Code-only installation completed successfully.</info>');
+            return Command::SUCCESS;
         }
 
         // Install Omeka S
