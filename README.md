@@ -92,6 +92,17 @@ php console install -y
 This will create the `public` directory under the project root. Set your web server's document root to the `public` 
 directory or configure a virtual host accordingly.
 
+> [!NOTE]
+> If it's running on a Unix-based system (Linux or macOS), make sure the current user running the command has write
+> permissions to the project directory.
+
+> [!NOTE]
+> If it's running on a Unix-based system (Linux or macOS), it will try to run the `chown` command to set the correct 
+> permissions on the `public/files` and `public/logs` directories based on the `apache_user` setting in the
+> `config.json` file, which requires `sudo` privileges without a password prompt. If it fails, you need to manually 
+> set the correct permissions on those directories after the installation. Make sure the `apache_user` has write
+> permissions to those directories.
+
 Once it's done, you can access the Omeka S site by navigating to your server's URL or the configured host name 
 in a web browser.
 
