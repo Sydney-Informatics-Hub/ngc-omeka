@@ -402,7 +402,6 @@ INI;
 
                 // If the module is Common, reload the Omeka application. This is needed for following modules that may depend on it.
                 if ($moduleName === 'Common') {
-                    $output->writeln('Reloading Omeka application after Common module installation...');
                     // Reload Omeka application.
                     @Omeka::reloadApp();
                     Omeka::authenticate();
