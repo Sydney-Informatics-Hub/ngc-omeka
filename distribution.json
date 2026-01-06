@@ -10,6 +10,11 @@
       "version": "3.4.73"
     },
     {
+      "name": "SingleSignOn",
+      "url": "https://github.com/Daniel-KM/Omeka-S-module-SingleSignOn/releases/download/3.4.25/SingleSignOn-3.4.25.zip",
+      "version": "3.4.25"
+    },
+    {
       "name": "CustomOntology",
       "url": "https://github.com/Daniel-KM/Omeka-s-module-CustomOntology/releases/download/3.4.6/CustomOntology-3.4.6.zip",
       "version": "3.4.6"
