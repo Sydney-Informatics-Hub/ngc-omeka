@@ -58,11 +58,6 @@
       "name": "GlycerineIIIFViewer",
       "url": "https://github.com/Systemik-Solutions/OmekaS-GlycerineViewer/releases/download/v1.0.0/GlycerineIIIFViewer-1.0.0.zip",
       "version": "1.0.0"
-    },
-    {
-      "name": "Mapping",
-      "url": "https://github.com/Sydney-Informatics-Hub/OmekaS-MappingExtensions/archive/refs/tags/0.1.1.zip",
-      "version": "0.1.1"
     }
   ],
   "themes": [
