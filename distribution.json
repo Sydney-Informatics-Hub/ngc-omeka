@@ -4,7 +4,12 @@
     "version": "4.1.1"
   },
   "modules": [
-    {
+  {
+      "name": "AnalyticsSnippet",
+      "url": "https://github.com/Daniel-KM/Omeka-S-module-AnalyticsSnippet/releases/download/3.4.4/AnalyticsSnippet-3.4.4.zip",
+      "version": "3.4.4"
+   },
+   {
       "name": "Common",
       "url": "https://github.com/Daniel-KM/Omeka-S-module-Common/releases/download/3.4.73/Common-3.4.73.zip",
       "version": "3.4.73"
@@ -25,6 +30,11 @@
       "version": "2.6.2"
     },
     {
+      "name": "ItemCarouselBlock",
+      "url": "https://github.com/omeka-s-modules/ItemCarouselBlock/releases/download/v1.4.1/ItemCarouselBlock-1.4.1.zip",
+      "version": "1.4.1"
+    },
+   {
       "name": "PdfEmbed",
       "url": "https://github.com/zerocrates/PdfEmbedS/releases/download/v1.3.0/PdfEmbed-1.3.0.zip",
       "version": "1.3.0"
@@ -60,9 +70,9 @@
       "version": "1.0.0"
     },
     {
-      "name": "Mapping",
+      "name": "MappingExtensions",
       "url": "https://github.com/Systemik-Solutions/OmekaS-MappingExtensions/releases/download/v1.0.0/MappingExtensions-1.0.0.zip",
-      "version": "1.0.0"
+      "version": "1.1.3"
     }
   ],
   "themes": [
@@ -70,6 +80,11 @@
       "name": "lively",
       "url": "https://github.com/omeka-s-themes/lively/releases/download/v1.0.0/lively-v1.0.0.zip",
       "version": "1.0.0"
+    },
+    {
+      "name": "papers",
+      "url": "https://github.com/omeka-s-themes/papers/releases/download/v1.4.5/theme-papers-v1.4.5.zip",
+      "version": "1.4.5"
     }
   ],
   "vocabularies": [
